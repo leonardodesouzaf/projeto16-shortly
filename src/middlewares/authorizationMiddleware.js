@@ -1,18 +1,15 @@
-import postgres from "../db/db.js";
-
-let db = await postgres();
+import connection from '../database/database.js';
 
 export default async function authorizationMiddleware(req, res, next) {
-    /* const token = req.headers.authorization?.replace('Bearer ', '');
+    const token = req.headers.authorization?.replace('Bearer ', '');
     if(!token) return res.status(401).send('Login não autorizado!');
-    const session = await db.collection("sessions").findOne({ token : token });       
-    if (!session) {
+    const query = await connection.query(`SELECT * FROM sessions WHERE token = $1;`, [token]);   
+    if (query.rows.length === 0) {
         return res.status(401).send('Login não autorizado!'); 
-    }
-    const user = await db.collection("users").findOne({ _id: new ObjectId(session.userId )});
-
-    delete user.password;
-    res.locals.user = user;
-  
-    next(); */
+    }else{
+        const queryUser = await connection.query(`SELECT * FROM users WHERE id = $1;`, [query.rows[0].userId]);   
+        delete queryUser.rows[0].password;
+        res.locals.user = queryUser.rows[0]; 
+    } 
+    next();
   }
