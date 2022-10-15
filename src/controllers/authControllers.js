@@ -2,7 +2,7 @@ import { v4 as uuid } from 'uuid';
 import bcrypt from 'bcrypt';
 import connection from '../database/database.js'; 
 
-export async function signIn (req, res){
+export async function signIn (req, res){ 
     try {
         const user = req.body;
         const query = await connection.query(`SELECT email,password,id FROM users WHERE email = $1;`, [user.email]);
