@@ -4,6 +4,7 @@ import cors from 'cors';
 import authRoutes from './routes/authRoutes.js';
 import urlsRoutes from './routes/urlsRoutes.js';
 import usersRoutes from './routes/usersRoutes.js';
+import rankingRoutes from './routes/rankingRoutes.js';
 
 dotenv.config();
 const app = express();
@@ -14,6 +15,7 @@ const router = express.Router();
 router.use(authRoutes);
 router.use(urlsRoutes);
 router.use(usersRoutes);
+router.use(rankingRoutes);
 
 app.use(router);
 
