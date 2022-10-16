@@ -19,4 +19,4 @@ router.use(rankingRoutes);
 
 app.use(router);
 
-app.listen(process.env.PORT, () => console.log(`App running in port: 4000`));
+app.listen(process.env.PORT, () => console.log(`Sever running on port ` + process.env.PORT));
