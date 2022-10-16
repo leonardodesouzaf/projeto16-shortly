@@ -10,6 +10,7 @@ export default async function authorizationMiddleware(req, res, next) {
         const queryUser = await connection.query(`SELECT * FROM users WHERE id = $1;`, [query.rows[0].userId]);   
         delete queryUser.rows[0].password;
         res.locals.user = queryUser.rows[0]; 
+        res.locals.token = token;
     } 
     next();
   }

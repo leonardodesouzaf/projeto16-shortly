@@ -3,6 +3,7 @@ import express from 'express';
 import cors from 'cors';
 import authRoutes from './routes/authRoutes.js';
 import urlsRoutes from './routes/urlsRoutes.js';
+import usersRoutes from './routes/usersRoutes.js';
 
 dotenv.config();
 const app = express();
@@ -12,6 +13,7 @@ app.use(express.json());
 const router = express.Router();
 router.use(authRoutes);
 router.use(urlsRoutes);
+router.use(usersRoutes);
 
 app.use(router);
 
